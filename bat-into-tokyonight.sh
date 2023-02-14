@@ -5,6 +5,7 @@ bat-into-tokyonight() (
 	local REPO_NAME='tokyonight.nvim/'
 	local THEME_DIR='extras/sublime/'
 
+	type bat >& /dev/null
 	local BAT_THEME_DIR="$(command bat --config-dir)/themes"
 	local BAT_THEME_CACHE="$(command bat --cache-dir)/themes.bin"
 
