@@ -27,7 +27,7 @@ bat-into-tokyonight() (
 	fi
 
 	# Validate the cache
-	if [[ -n "$(find "$BAT_THEME_DIR" -name '*.tmTheme' -mnewer "$BAT_THEME_CACHE")" ]]; then
+	if [[ -n "$(find "$BAT_THEME_DIR" -name '*.tmTheme' -newer "$BAT_THEME_CACHE")" ]]; then
 		command bat cache --build
 	fi
 
