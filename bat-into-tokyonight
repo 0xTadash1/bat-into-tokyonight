@@ -17,6 +17,10 @@ main() {
 		git clone --depth=1 --filter=blob:none --sparse "$REPO"
 		cd "$REPO_NAME"
 		git sparse-checkout set "$THEME_DIR"
+		# This doesn't prompt a user for confirmation.
+		# Especially watch out for the "Valve Steam Cleaner" !
+		# <https://www.theregister.com/2015/01/17/scary_code_of_the_week_steam_cleans_linux_pcs/>
+		find "${BAT_THEMES_DIR:?}/${REPO_NAME:?}" -maxdepth 1 -type f -delete
 	else
 		cd "$REPO_NAME"
 		git fetch
