@@ -43,7 +43,7 @@ cd bat-into-tokyonight
 ./bat-into-tokyonight
 ```
 
-I reccommend you to do `./bat-into-tokyonight` in a file such as `.bashrc` or `.zshrc`.
+I recommend you to do `./bat-into-tokyonight` in a file such as `.bashrc` or `.zshrc`.
 
 ### 3 ways to switch theme for `bat`
 
