@@ -14,13 +14,10 @@ main() {
 	[ ! -d "$BAT_THEMES_DIR" ] && mkdir -p "$BAT_THEMES_DIR"
 	cd "$BAT_THEMES_DIR"
 	if [ ! -d "$REPO_NAME" ]; then
-		git clone --depth=1 --filter=blob:none --sparse "$REPO"
+		git clone -q --sparse --no-checkout --depth=1 --filter=blob:none "$REPO"
 		cd "$REPO_NAME"
-		git sparse-checkout set "$THEME_DIR"
-		# This doesn't prompt a user for confirmation.
-		# Especially watch out for the "Valve Steam Cleaner" !
-		# <https://www.theregister.com/2015/01/17/scary_code_of_the_week_steam_cleans_linux_pcs/>
-		find "${BAT_THEMES_DIR:?}/${REPO_NAME:?}" -maxdepth 1 -type f -delete
+		git sparse-checkout set --no-cone '!/*' "$THEME_DIR"
+		git checkout -q
 	else
 		cd "$REPO_NAME"
 		git fetch
