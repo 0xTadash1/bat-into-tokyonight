@@ -55,6 +55,15 @@ I recommend you to do `(./bat-into-tokyonight &)` in a file such as `.bashrc` or
   https://github.com/sharkdp/bat#configuration-file
   "sharkdp/bat # Configuration file"
 
+## Uninstall / Cleanup themes
+
+Remove this plugin directory, and then:
+
+```sh
+command rm -rf "$(command bat --config-dir)/themes/tokyonight.nvim/"
+command bat cache --build
+```
+
 ## ❓ Why bring a Neovim theme?
 
 I prefer the colors of Folke flavored Tokyo Night theme.
