@@ -14,19 +14,14 @@ main() {
 	[ ! -d "$BAT_THEMES_DIR" ] && mkdir -p "$BAT_THEMES_DIR"
 	cd "$BAT_THEMES_DIR"
 	if [ ! -d "$REPO_NAME" ]; then
+		# Init
 		git clone -q --sparse --no-checkout --depth=1 --filter=blob:none "$REPO"
 		cd "$REPO_NAME"
 		git sparse-checkout set --no-cone '!/*' "$THEME_DIR"
 		git checkout -q
 	else
-		cd "$REPO_NAME"
-		git fetch
-		local behind=$(git rev-list --count "HEAD..@{u}")
-		if [ ${behind:?} != 0 ]; then
-			# Show changings
-			git -c core.pager='' log "HEAD..@{u}" --oneline
-			git merge
-		fi
+		# Update
+		git -C "$REPO_NAME" pull
 	fi
 
 	# Validate the cache, compare modification times
