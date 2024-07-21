@@ -30,7 +30,7 @@ main() {
 	fi
 
 	# Validate the cache, compare modification times
-	if [ ! -d "$BAT_THEME_CACHE" ] \
+	if [ ! -e "$BAT_THEME_CACHE" ] \
 	|| [ -n "$(find "$BAT_THEMES_DIR" -name '*.tmTheme' -newer "$BAT_THEME_CACHE")" ]; then
 		command bat cache --build
 	fi
