@@ -13,16 +13,19 @@ BAT_THEMES_DIR="$(command bat --config-dir)/themes"
 cd "$BAT_THEMES_DIR"
 if [ ! -d "$REPO_NAME" ]; then
 	# Init
-	git clone -q --sparse --no-checkout --depth=1 --filter=blob:none "$REPO"
+	git clone --no-checkout --depth=1 --filter=blob:none "$REPO"
 	cd "$REPO_NAME"
 	git sparse-checkout set --no-cone '!/*' "$THEME_DIR"
-	git checkout -q
+	git checkout
 else
 	# Update
-	git -C "$REPO_NAME" pull
+	cd "$REPO_NAME"
+	git fetch --filter=blob:none
+	updates="$(git rev-list HEAD..@{u} -- "$THEME_DIR")"
+	[ -n "$updates" ] && git merge --ff-only --log
 fi
 
-# Revalidate cache with mtime
+# Revalidate bat cache with mtime
 BAT_THEME_CACHE="$(command bat --cache-dir)/themes.bin"
 if [ ! -e "$BAT_THEME_CACHE" ] \
 || [ -n "$(find "$BAT_THEMES_DIR" -name '*.tmTheme' -newer "$BAT_THEME_CACHE")" ]; then
